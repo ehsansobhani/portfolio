@@ -1,808 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ehsan — Researcher & Developer</title>
-    <meta name="description" content="PhD Researcher in EV Infrastructure & Transportation Systems. Developer portfolio and academic profile.">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ehsan Sobhani | Data & AI Engineer</title>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <!-- ✅ Favicon (embedded SVG — no file needed) -->
+  <link rel="icon" href='data:image/svg+xml,
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <rect width="100" height="100" rx="20" fill="%230A0A0F"/>
+    <text x="50%" y="55%" font-size="50" text-anchor="middle" fill="%233D5AFE" font-family="Arial">E</text>
+  </svg>'>
 
-    <style>
-        /* ═══════════════════════════════════════════
-           CSS VARIABLES
-           ═══════════════════════════════════════════ */
-        :root {
-            --bg-primary: #0A0A0F;
-            --bg-secondary: #111118;
-            --bg-card: #16161F;
-            --bg-card-hover: #1C1C28;
-            --border: #2A2A3A;
-            --border-accent: #3D5AFE;
-            --text-primary: #E8E8F0;
-            --text-secondary: #9898AD;
-            --text-muted: #6B6B80;
-            --accent: #3D5AFE;
-            --accent-light: #536DFE;
-            --accent-glow: rgba(61, 90, 254, 0.15);
-            --accent-warm: #FF6B35;
-            --success: #00E676;
-            --font-display: 'DM Serif Display', Georgia, serif;
-            --font-body: 'Instrument Sans', system-ui, sans-serif;
-            --font-mono: 'JetBrains Mono', monospace;
-        }
+  <style>
+    body {
+      margin:0;
+      font-family: system-ui, sans-serif;
+      background:#0A0A0F;
+      color:#E8E8F0;
+      line-height:1.6;
+    }
 
-        /* ═══════════════════════════════════════════
-           RESET & BASE
-           ═══════════════════════════════════════════ */
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; font-size: 16px; }
-        body {
-            font-family: var(--font-body);
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.7;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-        a { color: var(--accent-light); text-decoration: none; transition: color 0.2s; }
-        a:hover { color: var(--accent-warm); }
-        ::selection { background: var(--accent); color: #fff; }
+    .container {
+      max-width:900px;
+      margin:auto;
+      padding:2rem;
+    }
 
-        /* ═══════════════════════════════════════════
-           NOISE OVERLAY
-           ═══════════════════════════════════════════ */
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-            pointer-events: none;
-            z-index: 9999;
-        }
+    h1,h2 { margin:0 0 1rem; }
+    h1 { font-size:2.5rem; }
+    h2 { margin-top:3rem; }
 
-        /* ═══════════════════════════════════════════
-           LAYOUT
-           ═══════════════════════════════════════════ */
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+    .hero {
+      text-align:center;
+      padding:3rem 0;
+    }
 
-        /* ═══════════════════════════════════════════
-           NAV
-           ═══════════════════════════════════════════ */
-        nav {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-            padding: 1.2rem 0;
-            background: rgba(10, 10, 15, 0.85);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid transparent;
-            transition: border-color 0.3s;
-        }
-        nav.scrolled { border-bottom-color: var(--border); }
-        nav .container { display: flex; justify-content: space-between; align-items: center; }
-        .nav-logo {
-            font-family: var(--font-display);
-            font-size: 1.4rem;
-            color: var(--text-primary);
-            letter-spacing: -0.02em;
-        }
-        .nav-logo span { color: var(--accent); }
-        .nav-links { display: flex; gap: 2rem; list-style: none; }
-        .nav-links a {
-            color: var(--text-secondary);
-            font-size: 0.88rem;
-            font-weight: 500;
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
-            position: relative;
-            padding-bottom: 2px;
-        }
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -2px; left: 0;
-            width: 0; height: 1.5px;
-            background: var(--accent);
-            transition: width 0.3s;
-        }
-        .nav-links a:hover { color: var(--text-primary); }
-        .nav-links a:hover::after { width: 100%; }
+    .hero img {
+      width:140px;
+      height:140px;
+      border-radius:50%;
+      object-fit:cover;
+      border:3px solid #3D5AFE;
+      margin-bottom:1rem;
+    }
 
-        .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; }
-        .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--text-primary); margin: 5px 0; transition: 0.3s; }
+    .tag {
+      color:#3D5AFE;
+      font-weight:600;
+      margin-bottom:1rem;
+      display:block;
+    }
 
-        /* ═══════════════════════════════════════════
-           HERO
-           ═══════════════════════════════════════════ */
-        .hero {
-            min-height: 100vh;
-            display: flex; align-items: center;
-            padding-top: 5rem;
-            position: relative;
-        }
-        .hero-bg-grid {
-            position: absolute; inset: 0;
-            background-image:
-                linear-gradient(var(--border) 1px, transparent 1px),
-                linear-gradient(90deg, var(--border) 1px, transparent 1px);
-            background-size: 60px 60px;
-            opacity: 0.15;
-            mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 100%);
-        }
-        .hero-content { position: relative; z-index: 1; }
-        .hero-label {
-            display: inline-flex; align-items: center; gap: 0.5rem;
-            font-family: var(--font-mono);
-            font-size: 0.78rem;
-            color: var(--accent-light);
-            letter-spacing: 0.08em;
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-        }
-        .hero-label .dot {
-            width: 6px; height: 6px;
-            background: var(--success);
-            border-radius: 50%;
-            animation: pulse 2s ease-in-out infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
-        .hero h1 {
-            font-family: var(--font-display);
-            font-size: clamp(2.8rem, 7vw, 5.5rem);
-            line-height: 1.08;
-            letter-spacing: -0.03em;
-            margin-bottom: 1.5rem;
-        }
-        .hero h1 .accent { color: var(--accent); }
-        .hero h1 .warm { color: var(--accent-warm); }
-        .hero-sub {
-            font-size: 1.15rem;
-            color: var(--text-secondary);
-            max-width: 560px;
-            line-height: 1.8;
-            margin-bottom: 2.5rem;
-        }
-        .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
-        .btn {
-            display: inline-flex; align-items: center; gap: 0.5rem;
-            padding: 0.85rem 1.8rem;
-            border-radius: 6px;
-            font-family: var(--font-body);
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.25s;
-            border: none;
-        }
-        .btn-primary {
-            background: var(--accent);
-            color: #fff;
-            box-shadow: 0 2px 20px var(--accent-glow);
-        }
-        .btn-primary:hover {
-            background: var(--accent-light);
-            color: #fff;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 30px rgba(61, 90, 254, 0.3);
-        }
-        .btn-outline {
-            background: transparent;
-            color: var(--text-primary);
-            border: 1px solid var(--border);
-        }
-        .btn-outline:hover {
-            border-color: var(--accent);
-            color: var(--accent-light);
-        }
-        .btn svg { width: 16px; height: 16px; }
+    .projects {
+      display:grid;
+      gap:1.5rem;
+    }
 
-        /* ═══════════════════════════════════════════
-           SECTION SHARED
-           ═══════════════════════════════════════════ */
-        section { padding: 7rem 0; }
-        .section-header {
-            margin-bottom: 3.5rem;
-        }
-        .section-label {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            margin-bottom: 0.75rem;
-        }
-        .section-title {
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 4vw, 3rem);
-            letter-spacing: -0.02em;
-        }
-        .section-divider {
-            width: 40px; height: 2px;
-            background: var(--accent);
-            margin-top: 1rem;
-        }
+    .card {
+      border:1px solid #2A2A3A;
+      padding:1.5rem;
+      border-radius:10px;
+      background:#16161F;
+    }
 
-        /* ═══════════════════════════════════════════
-           ABOUT
-           ═══════════════════════════════════════════ */
-        #about { background: var(--bg-secondary); }
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: start;
-        }
-        .about-text p { color: var(--text-secondary); margin-bottom: 1.2rem; }
-        .about-text p strong { color: var(--text-primary); font-weight: 600; }
-        .about-stats {
-            display: grid; grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-        }
-        .stat-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 1.5rem;
-            transition: border-color 0.3s, transform 0.3s;
-        }
-        .stat-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-2px);
-        }
-        .stat-number {
-            font-family: var(--font-display);
-            font-size: 2.2rem;
-            color: var(--accent-light);
-            line-height: 1;
-        }
-        .stat-label {
-            font-size: 0.82rem;
-            color: var(--text-muted);
-            margin-top: 0.4rem;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-        }
+    .tech {
+      font-size:0.8rem;
+      color:#9898AD;
+      margin-top:0.5rem;
+    }
 
-        /* ═══════════════════════════════════════════
-           RESEARCH / PUBLICATIONS
-           ═══════════════════════════════════════════ */
-        .pub-list { display: flex; flex-direction: column; gap: 1.5rem; }
-        .pub-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 2rem;
-            transition: border-color 0.3s, box-shadow 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-        .pub-card::before {
-            content: '';
-            position: absolute;
-            left: 0; top: 0; bottom: 0;
-            width: 3px;
-            background: var(--accent);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .pub-card:hover { border-color: var(--border-accent); box-shadow: 0 4px 30px rgba(0,0,0,0.3); }
-        .pub-card:hover::before { opacity: 1; }
-        .pub-venue {
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 0.6rem;
-        }
-        .pub-title {
-            font-family: var(--font-display);
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            line-height: 1.4;
-        }
-        .pub-authors { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.8rem; }
-        .pub-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-        .pub-tag {
-            font-size: 0.72rem;
-            padding: 0.25rem 0.7rem;
-            background: var(--accent-glow);
-            color: var(--accent-light);
-            border-radius: 20px;
-            font-weight: 500;
-        }
+    .status {
+      color:#00E676;
+      font-size:0.75rem;
+    }
 
-        /* ═══════════════════════════════════════════
-           PROJECTS
-           ═══════════════════════════════════════════ */
-        #projects { background: var(--bg-secondary); }
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.5rem;
-        }
-        .project-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 2rem;
-            transition: all 0.3s;
-            display: flex; flex-direction: column;
-        }
-        .project-card:hover {
-            border-color: var(--border-accent);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 40px rgba(0,0,0,0.3);
-        }
-        .project-icon {
-            width: 44px; height: 44px;
-            background: var(--accent-glow);
-            border-radius: 10px;
-            display: flex; align-items: center; justify-content: center;
-            margin-bottom: 1.2rem;
-            font-size: 1.3rem;
-        }
-        .project-card h3 {
-            font-family: var(--font-display);
-            font-size: 1.15rem;
-            margin-bottom: 0.6rem;
-        }
-        .project-card p {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            flex: 1;
-            margin-bottom: 1.2rem;
-        }
-        .project-tech {
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            color: var(--text-muted);
-            letter-spacing: 0.04em;
-        }
-        .project-links { display: flex; gap: 1rem; margin-top: 1rem; }
-        .project-links a {
-            font-size: 0.82rem;
-            font-weight: 600;
-            display: flex; align-items: center; gap: 0.3rem;
-        }
+    a {
+      color:#3D5AFE;
+      text-decoration:none;
+    }
 
-        /* ═══════════════════════════════════════════
-           SKILLS
-           ═══════════════════════════════════════════ */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.5rem;
-        }
-        .skill-group h3 {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--accent);
-            font-family: var(--font-mono);
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid var(--border);
-        }
-        .skill-group ul { list-style: none; }
-        .skill-group li {
-            padding: 0.4rem 0;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            display: flex; align-items: center; gap: 0.5rem;
-        }
-        .skill-group li::before {
-            content: '▸';
-            color: var(--accent);
-            font-size: 0.7rem;
-        }
-
-        /* ═══════════════════════════════════════════
-           CONTACT
-           ═══════════════════════════════════════════ */
-        #contact { background: var(--bg-secondary); }
-        .contact-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-        }
-        .contact-info p { color: var(--text-secondary); margin-bottom: 2rem; }
-        .contact-links { display: flex; flex-direction: column; gap: 1rem; }
-        .contact-link {
-            display: flex; align-items: center; gap: 0.8rem;
-            padding: 1rem 1.2rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            color: var(--text-primary);
-            transition: all 0.25s;
-        }
-        .contact-link:hover {
-            border-color: var(--accent);
-            color: var(--text-primary);
-            transform: translateX(4px);
-        }
-        .contact-link svg { width: 20px; height: 20px; color: var(--accent); flex-shrink: 0; }
-        .contact-link span { font-size: 0.9rem; }
-
-        /* ═══════════════════════════════════════════
-           FOOTER
-           ═══════════════════════════════════════════ */
-        footer {
-            padding: 2.5rem 0;
-            border-top: 1px solid var(--border);
-            text-align: center;
-        }
-        footer p { font-size: 0.8rem; color: var(--text-muted); }
-
-        /* ═══════════════════════════════════════════
-           ANIMATIONS
-           ═══════════════════════════════════════════ */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
-        }
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ═══════════════════════════════════════════
-           RESPONSIVE
-           ═══════════════════════════════════════════ */
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .nav-links.open {
-                display: flex;
-                flex-direction: column;
-                position: absolute;
-                top: 100%; left: 0; right: 0;
-                background: rgba(10, 10, 15, 0.97);
-                padding: 1.5rem 2rem;
-                gap: 1.2rem;
-                border-bottom: 1px solid var(--border);
-            }
-            .nav-toggle { display: block; }
-            .about-grid,
-            .contact-content { grid-template-columns: 1fr; gap: 2.5rem; }
-            .hero h1 { font-size: 2.5rem; }
-            section { padding: 4.5rem 0; }
-        }
-    </style>
+    footer {
+      text-align:center;
+      margin-top:3rem;
+      font-size:0.8rem;
+      color:#6B6B80;
+    }
+  </style>
 </head>
+
 <body>
+<div class="container">
 
-    <!-- ═══════════════ NAVIGATION ═══════════════ -->
-    <nav id="navbar">
-        <div class="container">
-            <a href="#" class="nav-logo">E<span>.</span></a>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#about">About</a></li>
-                <li><a href="#publications">Research</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
-                <span></span><span></span><span></span>
-            </button>
-        </div>
-    </nav>
+  <!-- 🔥 HERO -->
+  <div class="hero">
+    <img src="profile.jpg" alt="Ehsan">
 
-    <!-- ═══════════════ HERO ═══════════════ -->
-    <section class="hero">
-        <div class="hero-bg-grid"></div>
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-label">
-  <span class="dot"></span>
-  Data & AI Engineer
+    <span class="tag">Data Engineer · Data Scientist · AI Automation</span>
+
+    <h1>Building data systems & intelligent agents</h1>
+
+    <p>
+      I design data pipelines, machine learning systems, and AI agents that automate real-world workflows.
+    </p>
+  </div>
+
+  <!-- 🔥 PROJECTS -->
+  <h2>Projects</h2>
+  <div class="projects">
+
+    <div class="card">
+      <div class="status">● In Progress</div>
+      <h3>Real-Time Data Pipeline</h3>
+      <p>Streaming pipeline ingesting API data → processing → storage → dashboard.</p>
+      <div class="tech">Python · Kafka · PostgreSQL · Airflow</div>
+    </div>
+
+    <div class="card">
+      <div class="status">● In Progress</div>
+      <h3>Demand Prediction Model</h3>
+      <p>Machine learning system for forecasting demand using structured data.</p>
+      <div class="tech">Python · Scikit-learn · Pandas</div>
+    </div>
+
+    <div class="card">
+      <div class="status">● In Progress</div>
+      <h3>AI Outreach Agent</h3>
+      <p>Agent that generates emails, enriches leads, and automates scheduling.</p>
+      <div class="tech">OpenAI · LangChain · APIs</div>
+    </div>
+
+    <div class="card">
+      <div class="status">● In Progress</div>
+      <h3>Data Enrichment Pipeline</h3>
+      <p>Scraping + enrichment + validation pipeline for structured data.</p>
+      <div class="tech">Python · Scraping · APIs</div>
+    </div>
+
+  </div>
+
+  <!-- 🔥 SKILLS -->
+  <h2>Skills</h2>
+  <p>
+    <strong>Data Engineering:</strong> ETL, Airflow, Kafka, SQL<br>
+    <strong>Data Science:</strong> ML, Feature Engineering, Modeling<br>
+    <strong>AI:</strong> LLMs, LangChain, Automation Agents
+  </p>
+
+  <!-- 🔥 CONTACT -->
+  <h2>Contact</h2>
+  <p>
+    <a href="mailto:your@email.com">Email</a> |
+    <a href="https://github.com/yourusername">GitHub</a> |
+    <a href="https://linkedin.com/in/yourprofile">LinkedIn</a>
+  </p>
+
+  <footer>
+    © 2026 Ehsan Sobhani
+  </footer>
+
 </div>
-
-<h1>
-  Building scalable<br>
-  <span class="accent">data systems</span><br>
-  & intelligent agents<span class="warm">.</span>
-</h1>
-
-<p class="hero-sub">
-  I design data pipelines, machine learning systems, and AI agents that automate real-world workflows and decision-making.
-</p>
-                <div class="hero-actions">
-                    <a href="#publications" class="btn btn-primary">
-                        View Research
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </a>
-                    <a href="#contact" class="btn btn-outline">Get in Touch</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ═══════════════ ABOUT ═══════════════ -->
-    <section id="about">
-        <div class="container">
-            <div class="about-grid">
-                <div class="about-text fade-in">
-                    <div class="section-header">
-                        <div class="section-label">// About</div>
-                        <h2 class="section-title">Builder of Data Systems & AI Automation</h2>
-
-<p>
-I build end-to-end data systems — from ingestion and transformation to modeling and deployment.
-</p>
-
-<p>
-My work focuses on automating workflows using AI agents, building scalable pipelines, and delivering measurable results from data.
-</p>
-
-<p>
-I’m currently developing systems in data engineering, machine learning, and LLM-based automation.
-</p>
-                </div>
-                <div class="about-stats fade-in">
-                    <div class="stat-card">
-                        <div class="stat-number">234</div>
-                        <div class="stat-label">Arterial Zones Analyzed</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">3+</div>
-                        <div class="stat-label">Publications</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">1050</div>
-                        <div class="stat-label">Null Model Runs</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">85.7%</div>
-                        <div class="stat-label">WPD Outperformance</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-     <!-- ═══════════════ PUBLICATIONS ═══════════════ -->
-    <!-- <section id="publications">
-        <div class="container">
-            <div class="section-header fade-in">
-                <div class="section-label">// Research</div>
-                <h2 class="section-title">Publications</h2>
-                <div class="section-divider"></div>
-            </div>
-            <div class="pub-list">
-                <div class="pub-card fade-in">
-                    <div class="pub-venue">Applied Energy — Under Review</div>
-                    <h3 class="pub-title">Rethinking Spatial Units in BEV Fast Charging Planning: A Meso-Level Mobility-Based Approach</h3>
-                    <div class="pub-authors">E. [Your Last Name], H. E. Z. Farag</div>
-                    <div class="pub-tags">
-                        <span class="pub-tag">EV Charging</span>
-                        <span class="pub-tag">Spatial Analysis</span>
-                        <span class="pub-tag">MAUP</span>
-                        <span class="pub-tag">Meso-Level Zoning</span>
-                    </div>
-                </div>
-                <div class="pub-card fade-in">
-                    <div class="pub-venue">Conference Paper</div>
-                    <h3 class="pub-title">Activity-Based Dwell Modeling for EV Fast-Charging Infrastructure Planning</h3>
-                    <div class="pub-authors">E. [Your Last Name], H. E. Z. Farag</div>
-                    <div class="pub-tags">
-                        <span class="pub-tag">ABDP</span>
-                        <span class="pub-tag">Dwell Time</span>
-                        <span class="pub-tag">POI Analysis</span>
-                        <span class="pub-tag">Gaussian Weighting</span>
-                    </div>
-                </div>
-                <div class="pub-card fade-in">
-                    <div class="pub-venue">Working Paper</div>
-                    <h3 class="pub-title">Neutralization-Based Zonal Clustering for EV Charging District Planning</h3>
-                    <div class="pub-authors">E. [Your Last Name], H. E. Z. Farag</div>
-                    <div class="pub-tags">
-                        <span class="pub-tag">NBZC</span>
-                        <span class="pub-tag">Clustering</span>
-                        <span class="pub-tag">Shape-Constrained</span>
-                        <span class="pub-tag">Pareto Filtering</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>  -->
-
-    <!-- ═══════════════ PROJECTS ═══════════════ -->
-    <section id="projects">
-        <div class="container">
-            <div class="section-header fade-in">
-                <div class="section-label">// Projects</div>
-                <h2 class="section-title">Selected Work</h2>
-                <div class="section-divider"></div>
-            </div>
-            <div class="projects-grid">
-                <div class="project-card fade-in">
-                    <div class="project-icon">⚡</div>
-                    <h3>Distributed EV Charging Emulator</h3>
-                    <p>ISO 15118-compliant charging emulator with a React Native mobile app (EVCC) and Python asyncio server (EVSE) for real-time protocol testing.</p>
-                    <div class="project-tech">Python · React Native · ISO 15118 · asyncio</div>
-                    <div class="project-links">
-                        <a href="#">GitHub →</a>
-                    </div>
-                </div>
-                <div class="project-card fade-in">
-                    <div class="project-icon">🗺️</div>
-                    <h3>Charger Optimization Dashboard</h3>
-                    <p>Mapbox-based interactive dashboard for EV charger placement optimization with convex hull analysis and demand pinning across Toronto's arterial network.</p>
-                    <div class="project-tech">Mapbox · JavaScript · NetworkX · Python</div>
-                    <div class="project-links">
-                        <a href="#">Demo →</a>
-                        <a href="#">GitHub →</a>
-                    </div>
-                </div>
-                <div class="project-card fade-in">
-                    <div class="project-icon">📊</div>
-                    <h3>SmartMax Priority Scheduler</h3>
-                    <p>EV charging scheduling simulator with priority-based and FCFS benchmarking, built as standalone HTML apps and Python tools with Streamlit interface.</p>
-                    <div class="project-tech">Python · Streamlit · HTML/JS · Simulation</div>
-                    <div class="project-links">
-                        <a href="#">GitHub →</a>
-                    </div>
-                </div>
-                <div class="project-card fade-in">
-                    <div class="project-icon">🔍</div>
-                    <h3>Toronto Fast Charger Monitor</h3>
-                    <p>Automated logging system tracking live fast charger availability across Toronto using API integrations and web scraping for utilization analysis.</p>
-                    <div class="project-tech">Python · REST APIs · Web Scraping · Data Pipeline</div>
-                    <div class="project-links">
-                        <a href="#">GitHub →</a>
-                    </div>
-                </div>
-                <div class="project-card fade-in">
-                    <div class="project-icon">🏢</div>
-                    <h3>Chargia Energy Website</h3>
-                    <p>Corporate website for Chargia Energy Inc. — a centralized DC power charging product — built with ChargiaOS dark theme and multi-section single-file layout.</p>
-                    <div class="project-tech">HTML · CSS · JavaScript · UI Design</div>
-                    <div class="project-links">
-                        <a href="https://chargiaenergy.ca" target="_blank">Live Site →</a>
-                    </div>
-                </div>
-                <div class="project-card fade-in">
-                    <div class="project-icon">📐</div>
-                    <h3>Ridge-Path Proximity Analysis</h3>
-                    <p>NetworkX-based hop distance analysis between EV density zones and existing charger locations, with 180-configuration sensitivity sweep across hyperparameters.</p>
-                    <div class="project-tech">Python · NetworkX · Ridge Regression · Spatial Stats</div>
-                    <div class="project-links">
-                        <a href="#">GitHub →</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ═══════════════ SKILLS ═══════════════ -->
-    <section id="skills">
-        <div class="container">
-            <div class="section-header fade-in">
-                <div class="section-label">// Toolkit</div>
-                <h2 class="section-title">Skills &amp; Technologies</h2>
-                <div class="section-divider"></div>
-            </div>
-            <div class="skills-grid fade-in">
-                <div class="skill-group">
-                    <h3>Languages</h3>
-                    <ul>
-                        <li>Python</li>
-                        <li>JavaScript / TypeScript</li>
-                        <li>LaTeX</li>
-                        <li>HTML / CSS</li>
-                        <li>SQL</li>
-                    </ul>
-                </div>
-                <div class="skill-group">
-                    <h3>Frameworks & Tools</h3>
-                    <ul>
-                        <li>React / React Native</li>
-                        <li>Streamlit</li>
-                        <li>NetworkX</li>
-                        <li>asyncio</li>
-                        <li>Mapbox GL JS</li>
-                    </ul>
-                </div>
-                <div class="skill-group">
-                    <h3>Research Methods</h3>
-                    <ul>
-                        <li>Spatial Statistics (Moran's I)</li>
-                        <li>Graph-Based Analysis</li>
-                        <li>Multi-Objective Optimization</li>
-                        <li>Ridge Regression</li>
-                        <li>Activity-Based Modeling</li>
-                    </ul>
-                </div>
-                <div class="skill-group">
-                    <h3>Domain Expertise</h3>
-                    <ul>
-                        <li>EV Charging Infrastructure</li>
-                        <li>Transportation Systems</li>
-                        <li>ISO 15118 / OCPP</li>
-                        <li>Energy Systems Planning</li>
-                        <li>Geospatial Analysis</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ═══════════════ CONTACT ═══════════════ -->
-    <section id="contact">
-        <div class="container">
-            <div class="contact-content">
-                <div class="fade-in">
-                    <div class="section-header">
-                        <div class="section-label">// Contact</div>
-                        <h2 class="section-title">Let's Connect</h2>
-                        <div class="section-divider"></div>
-                    </div>
-                    <p>
-                        I'm always open to discussing research collaborations, EV infrastructure projects, 
-                        or interesting engineering challenges. Feel free to reach out.
-                    </p>
-                </div>
-                <div class="contact-links fade-in">
-                    <a href="mailto:your.email@yorku.ca" class="contact-link">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
-                        <span>your.email@yorku.ca</span>
-                    </a>
-                    <a href="https://github.com/yourusername" target="_blank" class="contact-link">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                        <span>github.com/yourusername</span>
-                    </a>
-                    <a href="https://linkedin.com/in/yourprofile" target="_blank" class="contact-link">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                        <span>LinkedIn Profile</span>
-                    </a>
-                    <a href="https://scholar.google.com/citations?user=YOURID" target="_blank" class="contact-link">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 100 14 7 7 0 000-14z"/></svg>
-                        <span>Google Scholar</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ═══════════════ FOOTER ═══════════════ -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 Ehsan. Built with precision.</p>
-        </div>
-    </footer>
-
-    <!-- ═══════════════ SCRIPT ═══════════════ -->
-    <script>
-        // Nav scroll effect
-        const nav = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            nav.classList.toggle('scrolled', window.scrollY > 50);
-        });
-
-        // Mobile toggle
-        const toggle = document.getElementById('navToggle');
-        const links = document.getElementById('navLinks');
-        toggle.addEventListener('click', () => links.classList.toggle('open'));
-        links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
-
-        // Scroll reveal
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-    </script>
 </body>
 </html>
